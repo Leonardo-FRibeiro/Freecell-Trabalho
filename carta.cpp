@@ -8,6 +8,12 @@ using namespace std;
 Carta::Carta(int val, string naip) {
     valor = val;
     naipe = naip;
+    
+    if(naip == "E" || naip == "P") {
+        cor = "P";
+    } else {
+        cor = "V";
+    }
 
     if(val >= 2 && val <= 10) { // Caso o valor passado esteja entre 2 e 10
         display = "[" + to_string(val) + naipe + "]";
@@ -35,5 +41,5 @@ Carta::Carta(int val, string naip) {
 // Pré-condição: Nenhuma
 // Pós-condição: É imprimido um gráfico que mostra as informações da carta.
 void Carta::Display() {
-    cout << "Display: " << display << " - Valor: " << valor << " - Naipe: " << naipe;
+    cout << "Display: " << display << " - Valor: " << valor << " - Naipe: " << naipe << " - Cor:" << cor;
 }
