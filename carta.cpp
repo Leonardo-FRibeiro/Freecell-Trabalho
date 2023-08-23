@@ -3,13 +3,14 @@
 
 using namespace std;
 
-void Carta::Inicializar(int val, string naip) {
+// Pré-condição: 1 <= val <= 13 | naip = 'E', 'C', 'O', 'P'.
+// Pós-condição: A carta é criada
+Carta::Carta(int val, string naip) {
     valor = val;
-    naipe = naipe;
+    naipe = naip;
 
     if(val >= 2 && val <= 10) { // Caso o valor passado esteja entre 2 e 10
         display = "[" + to_string(val) + naipe + "]";
-        cout << naip;
     } else { // Se não for o caso
         switch(val) {
             case 1: // Caso seja um ás
@@ -31,6 +32,8 @@ void Carta::Inicializar(int val, string naip) {
     }
 }
 
+// Pré-condição: Nenhuma
+// Pós-condição: É imprimido um gráfico que mostra as informações da carta.
 void Carta::Display() {
     cout << "Display: " << display << " - Valor: " << valor << " - Naipe: " << naipe;
 }
