@@ -1,23 +1,25 @@
-#include "carta.cpp"
 const int MAXSTACK = 26;
 
-class carta; //Chama o metodo da Classe Carta
+// Nota: Eu vou tentar implementar a funcionalidade de adicionar cartas a essa pilha,
+// eu ainda nn consegui fazer isso pq eu não lembro como q usa uma classe dentro da
+// outra. Talvez no meu almoço na quarta-feira eu consiga resolver isso. - Leo
+
 class Pilha{
     public:
-    Pilha();
-    void Push();
-    void Pop();
-    void Full();
-    void Inicializar(int val, string naip); //Com o chamado da Classe Carta, pode se usar os parametros de carta, dentro da pilha 
-    void Display();
-
+    Pilha(); // A função construtora já cria a pilha, não é necessário uma função p/ inicializar
+    ~Pilha(); // Função destrutora
+    void Push(); // Adiciona uma carta
+    void Pop(); // Remove uma carta
+    bool Full(); // Avisa se a pilha está cheia
+    void Display(); // Imprime o gráfico da pilha
 
     private:
     int top;
     int Entry[MAXSTACK+1];
 };
 
-
+// Nota: Eu acredito que essa pilha não vai ser necessária. Acho que nós conseguimos fazer tudo
+// com a pilha normal.
 class Pilha_Saida{
     public:
     

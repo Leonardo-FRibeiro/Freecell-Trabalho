@@ -38,8 +38,21 @@ Carta::Carta(int val, string naip) {
     }
 }
 
+// Pre-condição: Nenhuma
+// Pós-condição: Deleta essa carta
+Carta::~Carta() {
+    cout << "Carta foi deletada";
+}
+
 // Pré-condição: Nenhuma
-// Pós-condição: É imprimido um gráfico que mostra as informações da carta.
+// Pós-condição: É imprimido o gráfico dessa carta.
 void Carta::Display() {
+    cout << display;
+}
+
+// Pré-condição: Nenhuma
+// Pós condição: É imprimido os dados dessa carta (cor, valor, o gráfico, e o naipe)
+// Nota: Isso só deveria ser usado durante o desenvolvimento do sistema.
+void Carta::DebugPrint() {
     cout << "Display: " << display << " - Valor: " << valor << " - Naipe: " << naipe << " - Cor:" << cor;
 }
