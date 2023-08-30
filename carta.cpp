@@ -3,6 +3,18 @@
 
 using namespace std;
 
+// Pré-condição: Nenhuma
+// Pós-condição: Retorna uma carta indicando -1. 
+// Nota: Esse constrtor não deve ser chamado no código.
+// O compilador requeriu um construtor vazio assim, mas é para usar
+// o segundo.
+Carta::Carta() {
+    valor = -1;
+    cor = "-1";
+    naipe = "X";
+    display = "[-1X]";
+}
+
 // Pré-condição: 1 <= val <= 13 | naip = 'E', 'C', 'O', 'P'.
 // Pós-condição: A carta é criada
 Carta::Carta(int val, string naip) {

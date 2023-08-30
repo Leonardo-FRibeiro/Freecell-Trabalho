@@ -1,4 +1,5 @@
 #include "pilha.h"
+#include "carta.h"
 #include <cstdlib>
 #include <iostream>
 
@@ -12,7 +13,7 @@ Pilha::~Pilha() {
     cout << "Essa pilha foi deletada";
 }
 
-void Pilha::Push(){ //Ação que verifica se a pilha não esta cheia ou se possui um lixo de momoria
+void Pilha::Push(Carta c){ //Ação que verifica se a pilha não esta cheia ou se possui um lixo de momoria
     if(Full()){
         cout << "Pilha cheia" << endl;
         abort();

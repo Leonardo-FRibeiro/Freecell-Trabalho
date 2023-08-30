@@ -1,9 +1,13 @@
+#ifndef CARTA_H
+#define CARTA_H
+
 #include <iostream>
 using namespace std;
 
 // Essa classe vai representar uma carta individual. 
 class Carta {
     public:
+        Carta(); // Um construtor padrão (não deve ser usado no código)
         Carta(int val, string naip); // Construtor
         ~Carta(); // Destrutor
         void Display(); // Gráfico
@@ -14,3 +18,4 @@ class Carta {
         string cor; // "P" ou "V"
         int valor; // "1, 2, 11"
 };
+#endif
