@@ -2,23 +2,22 @@
 #define PILHA_H
 
 #include "carta.h"
-const int MAXSTACK = 26;
-// Nota: Eu vou tentar implementar a funcionalidade de adicionar cartas a essa pilha,
-// eu ainda nn consegui fazer isso pq eu não lembro como q usa uma classe dentro da
-// outra. Talvez no meu almoço na quarta-feira eu consiga resolver isso. - Leo
+const int MAXSTACK = 26; // A pilha guardará no máximo 26 elementos
 
+// Essa classe vai representar uma pilha. Cada pilha ira gerenciar duas colunas
+// do jogo. (4 pilhas para as 8 colunas principais, 2 pilhas para as pilhas de saída)
 class Pilha{
     public:
     Pilha(); // A função construtora já cria a pilha, não é necessário uma função p/ inicializar
     ~Pilha(); // Função destrutora
     void Push(Carta c); // Adiciona uma carta
-    void Pop(); // Remove uma carta
+    Carta Pop(); // Remove uma carta
     bool Full(); // Avisa se a pilha está cheia
-    void Display(); // Imprime o gráfico da pilha
+    void Display(); // Imprime todas as cartas da pilha
 
     private:
     int top;
-    Carta Entry[MAXSTACK+1];
+    Carta Entry[MAXSTACK];
 };
 
 // Nota: Eu acredito que essa pilha não vai ser necessária. Acho que nós conseguimos fazer tudo
