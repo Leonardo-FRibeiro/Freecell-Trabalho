@@ -8,57 +8,62 @@ using namespace std;
 // Pré-condição: Nenhuma
 // Pós-condição: É criada uma pilha
 Pilha::Pilha(){
-    top = 0;
+    top[0] = 0;
+    top[1] = 0;
+    // Nota: Por algum motivo, "int top[2] = {0, 0}" não funciona. Eu devia investigar isso.
 }
 
-// Pré-condição: Nenhuma
+// Pré-condição: A pilha foi criada
 // Pós-condição: A pilha é destruída.
 Pilha::~Pilha() {}
 
-// Pré-condição: É passado uma carta.
+// Pré-condição: É passado uma carta, e um valor do lado
+// (0 = pilha da esquerda), (1 = pilha da direita). (E a pilha foi criada)
 // Pós-condição: A pilha adicionará essa carta ao topo da pilha.
-void Pilha::Push(Carta c){
-    if(Full()){
+void Pilha::Push(Carta c, int lado){
+    if(Full(lado)){
         cout << "Pilha cheia" << endl;
     }else{
-        Entry[top] = c;
-        top++;
+        Entry[top[lado]][lado] = c;
+        top[lado]++;
     }
 }
 
-// Pré-condição: Nenhuma
-// Pós-condição: A pilha remove a carta em seu topo, e retorna ela.
-Carta Pilha::Pop() {
+// Pré-condição: A pilha foi criada.
+// Pós-condição: A pilha remove a carta no topo da coluna selecionada, e retorna ela 
+// (retorna uma carta-erro se não tiver uma carta ali).
+Carta Pilha::Pop(int lado) {
     if(top == 0) {
         cout << "Pilha vazia" << endl;
         return Carta();
     } else {
-        top--;
-        return Entry[top];
+        top[lado]--;
+        return Entry[top[lado]][lado];
     }
 }
 
-// Pré-condição: Nenhuma
+// Pré-condição: A pilha foi criada
 // Pós-condição: É retornado se a pilha está cheia
-bool Pilha::Full() {
-    if(top == MAXSTACK) {
+bool Pilha::Full(int lado) {
+    if(top[lado] == MAXSTACK) {
         return true;
     } else {
         return false;
     }
 }
 
-// Pré-condição: Nenhuma
+// Pré-condição: A pilha foi criada
 // Pós-condição: A pilha lista todas as suas cartas
 void Pilha::Display() {
-    if(top == 0) {
-        cout << "Esta pilha está vazia";
-    } else {
-        for(int i = 0; i < top; i++) {
-            cout << " ";
-            Entry[i].Display();
+    for(int x = 0; x < 2; x++) {        
+        if(top[x] == 0) {
+            cout << "Esta coluna esta vazia" << endl;
+        } else {
+            for(int y = 0; y < top[x]; y++) {
+                Entry[y][x].Display();
+            }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 
