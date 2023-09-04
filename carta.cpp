@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// Pré-condição: Nenhuma
+// Pré-condição: A carta foi criada
 // Pós-condição: Retorna uma carta indicando -1. 
 // Nota: Esse constrtor não deve ser chamado no código.
 // O compilador requeriu um construtor vazio assim, mas é para usar
@@ -50,17 +50,23 @@ Carta::Carta(int val, string naip) {
     }
 }
 
-// Pre-condição: Nenhuma
+// Pre-condição: A carta foi criada
 // Pós-condição: Deleta essa carta
 Carta::~Carta() {}
 
-// Pré-condição: Nenhuma
+// Pré-condição: A carta foi criada
 // Pós-condição: É imprimido o gráfico dessa carta.
 void Carta::Display() {
     cout << display;
 }
 
-// Pré-condição: Nenhuma
+// Pré-condição: A carta foi criada
+// Pós-condição: Essa função retorna o valor da carta.
+int Carta::GetValor() {
+    return valor;
+}
+
+// Pré-condição: A carta foi criada
 // Pós condição: É imprimido os dados dessa carta (cor, valor, o gráfico, e o naipe)
 // Nota: Isso só deveria ser usado durante o desenvolvimento do sistema.
 void Carta::DebugPrint() {

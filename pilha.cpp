@@ -67,6 +67,20 @@ void Pilha::Display() {
     }
 }
 
+// Pré-condição: A pilha foi criada
+// Pós-condição: A pilha lista as suas cartas de uma linha.
+void Pilha::DisplayLine(int linha) {
+    for(int i = 0; i < 2; i++) {
+        if(top[i] > linha) {
+            Entry[linha][i].Display();
+            string t = (Entry[linha][i].GetValor() == 10) ? " " : "  "; // Questão de espaçamento, a
+            cout << t; // carta 10 é mais "gordinha", então ela dá um espaço a menos pra ficar alinhada.
+        } else {
+            cout << "     ";
+        }
+    }
+}
+
 Pilha_Saida::Pilha_Saida(){
     top_saida = 0;
 }

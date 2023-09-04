@@ -5,25 +5,19 @@ using namespace std;
 
 int main () {
 
-    Carta c(10, "C");
+    Carta c1(10, "C");
     Carta c2(1, "P");
     Pilha p1;
-
+    Pilha p2;
     p1.Push(Carta(3, "O"), 0);
-    p1.Push(Carta(4, "P"), 0);
-    p1.Push(c, 0);
-    p1.Push(c2, 0);
-    p1.Push(c, 1);
-    p1.Push(Carta(3, "O"), 1);
+    p1.Push(c1, 0);
     p1.Push(c2, 1);
-    p1.Push(Carta(4, "P"), 1);
-    p1.Display();
-    if(p1.Full(0)) {
-        cout << "A M O G U S" << endl;
-    }
-    if(p1.Full(1)) {
-        cout << "AAAAAAAAAAA" << endl;
-    }
+    p1.Push(Carta(5, "P"), 0);
+    p1.DisplayLine(0);
+    cout << endl;
+    p1.DisplayLine(1);
+    cout << endl;
+    p1.DisplayLine(2);
 
     return 1;
 }

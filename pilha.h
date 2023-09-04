@@ -14,6 +14,7 @@ class Pilha{
     Carta Pop(int lado); // Remove uma carta no lado selecionado
     bool Full(int lado); // Avisa se a pilha do lado selecionado está cheia
     void Display(); // Imprime todas as cartas da pilha
+    void DisplayLine(int linha); // Imprime as cartas de uma linha
 
     private:
     int top[2]; // Nota: Do jeito que está implementado, essa variável para "1 acima" da verdadeira carta do topo.
