@@ -35,16 +35,6 @@ int main () {
 
     int gameState = 0; // Esta variavel guarda a situação em que o jogo se encontra.
     Pilha p1, p2, p3, p4; // Estas são as estruturas que guardam as cartas.
-    p1.Push(Carta(3, "O"), 0);
-    p1.Push(Carta(5, "P"), 1);
-    p1.Push(Carta(3, "P"), 1);
-    p1.Push(Carta(12, "E"), 1);
-    p2.Push(Carta(3, "E"), 0);
-    p2.Push(Carta(6, "O"), 1);
-    p3.Push(Carta(7, "P"), 0);
-    p3.Push(Carta(11, "C"), 1);
-    p4.Push(Carta(2, "E"), 0);
-    p4.Push(Carta(13, "E"), 1);
 
     while(gameState == 0) {
         system("cls"); // Nota: Isso funciona apenas no windows. 
