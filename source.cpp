@@ -1,6 +1,7 @@
 #include <iostream>
 #include "carta.h"
 #include "pilha.h"
+#include <cstdlib>
 using namespace std;
 
 // Pré-condição: Os elementos do jogo foram inicializados, e são passados como parâmetros
@@ -19,6 +20,19 @@ void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4) {
 }
 
 int main () {
+    
+    srand(time(0));
+    int i;
+    Carta carta[52]; // vetor de 52 carta
+    string naipes[] = {"P", "O", "C", "E"};
+    //O for ta preenchendo o vetor com as 52 cartas
+    for(int valor = 1; valor <= 13; valor++){
+        for(int naipe = 0; naipe < 4; naipe++){
+            carta[i] = Carta(valor, naipes[naipe]);
+            i++;
+        }
+    }
+
     int gameState = 0; // Esta variavel guarda a situação em que o jogo se encontra.
     Pilha p1, p2, p3, p4; // Estas são as estruturas que guardam as cartas.
     p1.Push(Carta(3, "O"), 0);
