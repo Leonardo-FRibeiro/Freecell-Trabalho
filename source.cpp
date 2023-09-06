@@ -1,10 +1,23 @@
 #include <iostream>
 #include "carta.h"
 #include "pilha.h"
+#include <cstdlib>
 using namespace std;
 
 int main () {
+        srand(time(0));
+    int i;
+    Carta carta[52]; // vetor de 52 carta
+    string naipes[] = {"P", "O", "C", "E"};
+    //O for ta preenchendo o vetor com as 52 cartas
+    for(int valor = 1; valor <= 13; valor++){
+        for(int naipe = 0; naipe < 4; naipe++){
+            carta[i] = Carta(valor, naipes[naipe]);
+            i++;
+        }
+    }
 
+    
     Carta c1(10, "C");
     Carta c2(1, "P");
     Pilha p1;
