@@ -76,7 +76,7 @@ void Pilha::DisplayLine(int linha) {
             string t = (Entry[linha][i].GetValor() == 10) ? " " : "  "; // Questão de espaçamento, a
             cout << t; // carta 10 é mais "gordinha", então ela dá um espaço a menos pra ficar alinhada.
         } else {
-            cout << "     ";
+            cout << "      ";
         }
     }
 }
