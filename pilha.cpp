@@ -13,6 +13,14 @@ Pilha::Pilha(){
     // Nota: Por algum motivo, "int top[2] = {0, 0}" não funciona. Eu devia investigar isso.
 }
 
+// Pré-condição: Outra pilha foi criada
+// Pós-condição: É criada outra pilha, com o ponteiro apontando para a próxima pilha.
+Pilha::Pilha(Pilha* p) {
+    top[0] = 0;
+    top[1] = 0;
+    proximaPilha = p;
+}
+
 // Pré-condição: A pilha foi criada
 // Pós-condição: A pilha é destruída.
 Pilha::~Pilha() {}
@@ -26,6 +34,18 @@ void Pilha::Push(Carta c, int lado){
     }else{
         Entry[top[lado]][lado] = c;
         top[lado]++;
+    }
+}
+
+// Pré-condição: A pilha foi criada.
+// Se houver uma carta nesse lado, ele retorna ela. Retorna uma carta-erro no caso da pilha
+// estar vazia. 
+Carta Pilha::GetTop(int lado) {
+    if(top[lado] == 0) {
+        cout << "Pilha vazia" << endl;
+        return Carta();
+    } else {
+        return Entry[top[lado]-1][lado];
     }
 }
 

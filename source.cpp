@@ -19,6 +19,19 @@ void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4) {
     }
 }
 
+Carta GetCarta(int local, int index, Pilha* Pilha) {
+    if(index == local) {
+        Carta r = Pilha->GetTop(0);
+        return r;
+    } else if(index + 1 == local) {
+        Carta r = Pilha->GetTop(1);
+        return r;
+    } else {
+        Carta r = GetCarta(local, index + 2, Pilha->proximaPilha);
+        return r;
+    }
+}
+
 int main () {
     
     srand(time(0));
@@ -36,14 +49,25 @@ int main () {
     for(int i = 51; i > 0; i--){
         swap(carta[i], carta[rand()%(i+1)]);
     }
-    int gameState = 0; // Esta variavel guarda a situação em que o jogo se encontra.
-    Pilha p1, p2, p3, p4; // Estas são as estruturas que guardam as cartas.
 
+    int seletor, gameState = 0; // Esta variavel guarda a situação em que o jogo se encontra.
+    Pilha p4 = Pilha(); // Estas são as estruturas que guardam as cartas.
+    Pilha p3 = Pilha(&p4);
+    Pilha p2 = Pilha(&p3);
+    Pilha p1 = Pilha(&p2);
+    p1.Push(Carta(2, "O"), 1);
+    p2.Push(Carta(13, "E"), 0);
+    p4.Push(Carta(1, "C"), 1);
+    p1.Push(Carta(3, "P"), 0);
+
+    Carta cartaSelecionada; // Esta é a carta que o jogador está "segurando".
     while(gameState == 0) {
         system("cls"); // Nota: Isso funciona apenas no windows. 
         cout << "Escolha uma carta para mover" << endl;
         DisplayBoard(p1, p2, p3, p4);
-        cin.get();
+        cin >> seletor;
+        cartaSelecionada = GetCarta(seletor, 1, &p1);
+        cartaSelecionada.DebugPrint();
     }
     return 1;
 }
