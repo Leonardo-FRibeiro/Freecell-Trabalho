@@ -54,18 +54,30 @@ Carta Pilha::GetTop(int lado) {
 // (retorna uma carta-erro se não tiver uma carta ali).
 Carta Pilha::Pop(int lado) {
     if(top == 0) {
-        cout << "Pilha vazia" << endl;
+        //cout << "Pilha vazia" << endl;
         return Carta();
     } else {
         top[lado]--;
-        return Entry[top[lado]][lado];
+        Carta c = Entry[top[lado]][lado];
+        Entry[top[lado]][lado] = Carta();
+        return c;
     }
 }
 
 // Pré-condição: A pilha foi criada
-// Pós-condição: É retornado se a pilha está cheia
+// Pós-condição: É retornado se a pilha está cheia ou não.
 bool Pilha::Full(int lado) {
     if(top[lado] == MAXSTACK) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Pré-condição: A pilha foi criada
+// Pós- condição: Retorna se a pilha está vazia ou não.
+bool Pilha::Empty(int lado) {
+    if(top[lado] == 0) {
         return true;
     } else {
         return false;

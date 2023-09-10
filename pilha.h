@@ -15,6 +15,7 @@ class Pilha{
     Carta GetTop(int lado); // Obtem a carta no topo no lado selecionado
     Carta Pop(int lado); // Remove uma carta no lado selecionado
     bool Full(int lado); // Avisa se a pilha do lado selecionado está cheia
+    bool Empty(int lado); // Avisa se a pilha do lado selecionado está vazia
     void Display(); // Imprime todas as cartas da pilha
     void DisplayLine(int linha); // Imprime as cartas de uma linha
     Pilha* proximaPilha; // Este ponteiro aponta para a pilha que aprece a esquerda do usuário.

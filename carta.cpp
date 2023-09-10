@@ -67,6 +67,12 @@ int Carta::GetValor() {
 }
 
 // Pré-condição: A carta foi criada
+// Pós-condição: Essa função retorna a cor da carta.
+string Carta::GetCor() {
+    return cor;
+}
+
+// Pré-condição: A carta foi criada
 // Pós condição: É imprimido os dados dessa carta (cor, valor, o gráfico, e o naipe)
 // Nota: Isso só deveria ser usado durante o desenvolvimento do sistema.
 void Carta::DebugPrint() {

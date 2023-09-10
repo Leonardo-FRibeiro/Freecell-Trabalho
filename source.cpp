@@ -50,23 +50,52 @@ void FindAndPop(int local, int index, Pilha* pilhaInicio) {
     }
 }
 
-void FindAndPush(int local, int index, Pilha* pilhaInicio, Carta c) {
+// Pré-condição: O usuário está movendo a carta para um lugar válido.
+// Essa função deve achar a pilha para qual a carta está sendo movida e adiciona-la. Se não for possível,
+// ele retorna false. (Se der certo retorna true)
+bool FindAndPush(int local, int index, Pilha* pilhaInicio, Carta c) {
+    Carta check;
     if(index == local) {
-        pilhaInicio->Push(c, 0);
+        if(pilhaInicio->Empty(0)) {
+            pilhaInicio->Push(c, 0);
+            return true;
+        } else {
+            check = pilhaInicio->GetTop(0); // A carta no topo da pilha selecionada.
+            if (check.GetCor() != c.GetCor() && check.GetValor() == 1 + c.GetValor()) {
+                pilhaInicio->Push(c, 0);
+                return true;
+            } else {
+                return false;
+            }
+        }
     } else if(index + 1 == local) {
-        pilhaInicio->Push(c, 1);
+        if(pilhaInicio->Empty(1)) {
+            pilhaInicio->Push(c, 1);
+            return true;
+        } else {
+            check = pilhaInicio->GetTop(1);
+            if (check.GetCor() != c.GetCor() && check.GetValor() == 1 + c.GetValor()) {
+                pilhaInicio->Push(c, 1);
+                return true;
+            } else {
+                return false;
+            }   
+        }
     } else {
-        FindAndPush(local, index + 2, pilhaInicio->proximaPilha, c);
+        return FindAndPush(local, index + 2, pilhaInicio->proximaPilha, c);
     }
 }
 
-void MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c) {
-    FindAndPush(destino, 1, pilhaInicio, c);
-    FindAndPop(origem, 1, pilhaInicio);
+bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c) {
+    if (FindAndPush(destino, 1, pilhaInicio, c)) {
+        FindAndPop(origem, 1, pilhaInicio);
+        return true;
+    } else {
+        return false;
+    }
 }
 
 int main () {
-    
     srand(time(0));
     int index;
     Carta carta[52]; // vetor de 52 carta
@@ -83,33 +112,46 @@ int main () {
         swap(carta[i], carta[rand()%(i+1)]);
     }
 
-    int origem, destino, gameState = 0; // Esta variavel guarda a situação em que o jogo se encontra.
+    int origem, destino, gameState = 1; // Esta variavel guarda a situação em que o jogo se encontra.
     Pilha p4 = Pilha(); // Estas são as estruturas que guardam as cartas.
     Pilha p3 = Pilha(&p4);
     Pilha p2 = Pilha(&p3);
     Pilha p1 = Pilha(&p2);
-    p1.Push(Carta(2, "O"), 1);
-    p2.Push(Carta(13, "E"), 0);
-    p4.Push(Carta(1, "C"), 1);
-    p1.Push(Carta(3, "P"), 0);
+    p1.Push(Carta(1, "E"), 0);
+    p1.Push(Carta(2, "C"), 1);
+    p2.Push(Carta(3, "O"), 0);
+    p2.Push(Carta(4, "P"), 1);
 
     
     Carta cartaSelecionada; // Esta é a carta que o jogador está "segurando".
-    while(gameState == 0) {
-        system("cls"); // Nota: Isso funciona apenas no windows. 
-        cout << "Escolha uma carta para mover" << endl;
-        DisplayBoard(p1, p2, p3, p4);
-        cin >> origem;
-        cartaSelecionada = GetCarta(origem, 1, &p1);
-        system("cls");
-        DisplayBoard(p1, p2, p3, p4);
-        cout << "A carta selecionada: ";
-        cartaSelecionada.Display();
-        DisplayBoard(p1, p2, p3, p4);
-        cout << endl << "Escolha onde voce quer mover a carta: " << endl;
-        cin >> destino;
-        MoveCard(destino, origem, &p1, cartaSelecionada);
+    while(gameState != 0) {
+        if(gameState == 1) {
+            cout << "Escolha uma carta para mover" << endl;
+            DisplayBoard(p1, p2, p3, p4);
+            cin >> origem;
+            cartaSelecionada = GetCarta(origem, 1, &p1);
+            system("cls"); // Nota: Isso funciona apenas no windows.
+            if(cartaSelecionada.GetValor() == -1) {
+                cout << "Erro: a coluna selecionada nao tem uma carta" << endl;
+            } else {
+                gameState = 2;
+            }
+        } else if (gameState == 2) {
+            //system("cls");
+            DisplayBoard(p1, p2, p3, p4);
+            cout << "A carta selecionada: ";
+            cartaSelecionada.Display();
+            cout << endl << "Escolha onde voce quer mover a carta: " << endl;
+            cin >> destino;
+            if(MoveCard(destino, origem, &p1, cartaSelecionada) == true) {
+                gameState = 1;
+            } else {
+                cout << "Houve um erro na hora de mover a carta" << endl;
+                gameState = 2;
+            }
+        }
     }
+
     return 1;
 }
 

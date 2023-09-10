@@ -13,6 +13,7 @@ class Carta {
         void Display(); // Gráfico
         void DebugPrint(); // Função para debugar
         int GetValor(); // Retorna o valor
+        string GetCor(); // Retorna a cor
     private:
         string display; // "A, 2, V"
         string naipe; // "Copas, ouro"
