@@ -44,7 +44,7 @@ Carta::Carta(int val, string naip) {
                 display = "[K" + naipe + "]";
                 break;
             default: // Se cair aqui, alguma coisa deu catastroficamente errado.
-                display = "[Erro]";
+                display = "[" + naipe + naipe + "]";
                 break;
         }
     }
@@ -70,6 +70,12 @@ int Carta::GetValor() {
 // Pós-condição: Essa função retorna a cor da carta.
 string Carta::GetCor() {
     return cor;
+}
+
+// Pré-condição: A carta foi criada
+// Pós-condição: Essa função retorna o naipe da carta.
+string Carta::GetNaipe() {
+    return naipe;
 }
 
 // Pré-condição: A carta foi criada

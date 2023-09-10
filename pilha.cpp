@@ -112,7 +112,3 @@ void Pilha::DisplayLine(int linha) {
         }
     }
 }
-
-Pilha_Saida::Pilha_Saida(){
-    top_saida = 0;
-}

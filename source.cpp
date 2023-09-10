@@ -1,20 +1,28 @@
 #include <iostream>
 #include "carta.h"
 #include "pilha.h"
+#include "pilha_saida.h"
 #include <cstdlib>
 using namespace std;
 
 // Pré-condição: Os elementos do jogo foram inicializados, e são passados como parâmetros
 // Pós-condição: Renderiza os elementos do jogo.
-void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4) {
-    cout << "Pilhas de jogo: " << endl;
-    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)" << endl;
+void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_Saida ps1, Pilha_Saida ps2, Pilha_Saida ps3, Pilha_Saida ps4) {
+    cout << "Pilhas de jogo:                                 | Pilhas de saida: " << endl;
+    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)" << endl;
     for (int i = 0; i < 13; i++)
     {
         pilha1.DisplayLine(i);
         pilha2.DisplayLine(i);
         pilha3.DisplayLine(i);
         pilha4.DisplayLine(i);
+        cout << "| ";
+        if(i == 0) {
+            ps1.Display();
+            ps2.Display();
+            ps3.Display();
+            ps4.Display();
+        }
         cout << endl;
     }
 }
@@ -117,6 +125,10 @@ int main () {
     Pilha p3 = Pilha(&p4);
     Pilha p2 = Pilha(&p3);
     Pilha p1 = Pilha(&p2);
+    Pilha_Saida psE = Pilha_Saida("E");
+    Pilha_Saida psC = Pilha_Saida("C", &psE);
+    Pilha_Saida psO = Pilha_Saida("O", &psC);
+    Pilha_Saida psP = Pilha_Saida("P", &psO);
     p1.Push(Carta(1, "E"), 0);
     p1.Push(Carta(2, "C"), 1);
     p2.Push(Carta(3, "O"), 0);
@@ -127,7 +139,7 @@ int main () {
     while(gameState != 0) {
         if(gameState == 1) {
             cout << "Escolha uma carta para mover" << endl;
-            DisplayBoard(p1, p2, p3, p4);
+            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP);
             cin >> origem;
             cartaSelecionada = GetCarta(origem, 1, &p1);
             system("cls"); // Nota: Isso funciona apenas no windows.
@@ -138,7 +150,7 @@ int main () {
             }
         } else if (gameState == 2) {
             //system("cls");
-            DisplayBoard(p1, p2, p3, p4);
+            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP);
             cout << "A carta selecionada: ";
             cartaSelecionada.Display();
             cout << endl << "Escolha onde voce quer mover a carta: " << endl;
