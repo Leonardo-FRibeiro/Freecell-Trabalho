@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/augus/GitGithub/C-C++/c++/Freecell-Trabalho",
-      "program": "c:/Users/augus/GitGithub/C-C++/c++/Freecell-Trabalho/build/Debug/outDebug",
+      "cwd": "c:/Users/luisf/OneDrive/Área de Trabalho/Projetos com VS Code/Freecell-Trabalho",
+      "program": "c:/Users/luisf/OneDrive/Área de Trabalho/Projetos com VS Code/Freecell-Trabalho/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
