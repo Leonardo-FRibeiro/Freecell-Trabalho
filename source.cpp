@@ -94,10 +94,29 @@ bool FindAndPush(int local, int index, Pilha* pilhaInicio, Carta c) {
     }
 }
 
-bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c) {
-    if (FindAndPush(destino, 1, pilhaInicio, c)) {
-        FindAndPop(origem, 1, pilhaInicio);
-        return true;
+bool FindAndPush(int local, int index, Pilha_Saida* pilhaInicio, Carta c) {
+    if(index == local) {
+        return pilhaInicio->Push(c);
+    } else {
+        return FindAndPush(local, index + 1, pilhaInicio->nextPilhaS, c);
+    }
+}
+
+bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c, Pilha_Saida* pilhaSInicio) {
+    if(destino <= 8) {
+        if (FindAndPush(destino, 1, pilhaInicio, c)) {
+            FindAndPop(origem, 1, pilhaInicio);
+            return true;
+        } else {
+            return false;
+        }
+    } else if(destino > 8 && destino < 13 ) {
+        if (FindAndPush(destino, 9, pilhaSInicio, c)) {
+            FindAndPop(origem, 1, pilhaInicio);
+            return true;
+        } else {
+            return false;
+        }
     } else {
         return false;
     }
@@ -125,14 +144,14 @@ int main () {
     Pilha p3 = Pilha(&p4);
     Pilha p2 = Pilha(&p3);
     Pilha p1 = Pilha(&p2);
-    Pilha_Saida psE = Pilha_Saida("E");
-    Pilha_Saida psC = Pilha_Saida("C", &psE);
-    Pilha_Saida psO = Pilha_Saida("O", &psC);
-    Pilha_Saida psP = Pilha_Saida("P", &psO);
+    Pilha_Saida psP = Pilha_Saida("P");
+    Pilha_Saida psO = Pilha_Saida("O", &psP);
+    Pilha_Saida psC = Pilha_Saida("C", &psO);
+    Pilha_Saida psE = Pilha_Saida("E", &psC);
     p1.Push(Carta(1, "E"), 0);
-    p1.Push(Carta(2, "C"), 1);
-    p2.Push(Carta(3, "O"), 0);
-    p2.Push(Carta(4, "P"), 1);
+    p1.Push(Carta(1, "C"), 1);
+    p2.Push(Carta(1, "O"), 0);
+    p2.Push(Carta(1, "P"), 1);
 
     
     Carta cartaSelecionada; // Esta é a carta que o jogador está "segurando".
@@ -153,9 +172,13 @@ int main () {
             DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP);
             cout << "A carta selecionada: ";
             cartaSelecionada.Display();
-            cout << endl << "Escolha onde voce quer mover a carta: " << endl;
+            cout << endl << "Escolha onde voce quer mover a carta(0 para cancelar): " << endl;
             cin >> destino;
-            if(MoveCard(destino, origem, &p1, cartaSelecionada) == true) {
+            if(destino == 0) {
+                cartaSelecionada = Carta();
+                gameState = 1;
+            }
+            else if(MoveCard(destino, origem, &p1, cartaSelecionada, &psE) == true) {
                 gameState = 1;
             } else {
                 cout << "Houve um erro na hora de mover a carta" << endl;
