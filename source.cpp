@@ -25,6 +25,7 @@ void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_
         }
         cout << endl;
     }
+        cout << "(F1) (F2) (F3) (F4)" << endl;
 }
 
 // Pré-condição: O jogo foi inicializado.
