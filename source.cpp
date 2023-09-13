@@ -122,7 +122,8 @@ bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c, Pilha_Saida*
         return false;
     }
 }
-
+//Pré-condição: 
+// Pós-condição:
 void Embaralhamento(int indice_pilha, int indice_vetor, Pilha* Primeira_pilha, Carta cartas[52]){
     cout << indice_pilha << " - " << indice_vetor<< endl;
     int coluna;
@@ -227,9 +228,9 @@ int main () {
 
 // ----------------------------
 // O que eu acho que seriam os próximos passos: 
-// - Agente devia criar um vetor com 52 espaços no começo, e preencher eles com as cartas. (ja estou fazendo isso - Augusto)
-// Esse preenchimento devia ser aleatório.(ja estou fazendo isso - Augusto)
 // - As freecells, um objetinho básico pra guardar uma única carta.
 // ----------------------------
 
 // - Leo. 
+
+//Fiz a distribuição das cartas ;p
