@@ -121,6 +121,41 @@ bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c, Pilha_Saida*
         return false;
     }
 }
+//Pré-condição: 
+// Pós-condição:
+void Embaralhamento(int indice_pilha, int indice_vetor, Pilha* Primeira_pilha, Carta cartas[52]){
+    cout << indice_pilha << " - " << indice_vetor<< endl;
+    int coluna;
+    int v = indice_vetor;
+    if(indice_pilha>4){
+        coluna = 6;
+    }else{
+        coluna = 7;
+
+    }
+
+
+    if(indice_pilha%2==0){
+        for(int i = 0; i < coluna; i++){
+            Primeira_pilha->Push(cartas[v],1);
+            v++;
+        }
+
+        if(indice_pilha<8){
+        Embaralhamento(indice_pilha+1, v, Primeira_pilha->proximaPilha,cartas);
+
+        }
+    }else{
+        for(int i = 0; i < coluna; i++){
+            Primeira_pilha->Push(cartas[v],0);
+            v++;
+        }
+        if(indice_pilha<8){
+             Embaralhamento(indice_pilha+1, v, Primeira_pilha,cartas);
+
+        }
+    }
+}
 
 int main () {
     srand(time(0));
@@ -148,10 +183,8 @@ int main () {
     Pilha_Saida psO = Pilha_Saida("O", &psP);
     Pilha_Saida psC = Pilha_Saida("C", &psO);
     Pilha_Saida psE = Pilha_Saida("E", &psC);
-    p1.Push(Carta(1, "E"), 0);
-    p1.Push(Carta(1, "C"), 1);
-    p2.Push(Carta(1, "O"), 0);
-    p2.Push(Carta(1, "P"), 1);
+    
+    Embaralhamento(1, 0, &p1, carta);
 
     
     Carta cartaSelecionada; // Esta é a carta que o jogador está "segurando".
@@ -194,9 +227,9 @@ int main () {
 
 // ----------------------------
 // O que eu acho que seriam os próximos passos: 
-// - Agente devia criar um vetor com 52 espaços no começo, e preencher eles com as cartas. (ja estou fazendo isso - Augusto)
-// Esse preenchimento devia ser aleatório.(ja estou fazendo isso - Augusto)
 // - As freecells, um objetinho básico pra guardar uma única carta.
 // ----------------------------
 
 // - Leo. 
+
+//Fiz a distribuição das cartas ;p
