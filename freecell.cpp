@@ -63,8 +63,7 @@ using namespace std;
         }
     }
 
-    void freeCell::Display()
+    void freeCell::display()
     {
-        current.Display();
-        cout << "   ";
+        
     }
