@@ -7,7 +7,7 @@ using namespace std;
 class freeCell
 {
     public:
-    freeCell();
+    freeCell(string Free_Cell, freeCell* pFC);
     bool Empty(int count, freeCell& cell);
     bool Full(int count);
     void PushFreeCell(int count, Carta c);
@@ -18,7 +18,7 @@ class freeCell
     private:
     int count = 0;
     Carta current;
-    string naipe;
+    string Free_Cell;
     
 };
 #endif

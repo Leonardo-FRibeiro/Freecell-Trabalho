@@ -5,8 +5,12 @@ using namespace std;
     const int MAXVALOR = 1;
     const int numFreeCells = 4;
 
-    freeCell::freeCell()
-    {} 
+    freeCell::freeCell(string fc, freeCell* pFC)
+    {
+        current = Carta(14, fc);
+        Free_Cell = fc;
+        nextfreeCell = pFC;
+    } 
 
     bool freeCell::Empty(int count, freeCell& cell)
     {
@@ -65,5 +69,5 @@ using namespace std;
 
     void freeCell::display()
     {
-        
+
     }

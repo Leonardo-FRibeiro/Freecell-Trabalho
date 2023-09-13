@@ -1,6 +1,9 @@
 #ifndef PILHA_SAIDA_H
 #define PILHA_SAIDA_H
 #include "carta.h"
+
+
+
 class Pilha_Saida {
     public:
         Pilha_Saida(string naipe);
