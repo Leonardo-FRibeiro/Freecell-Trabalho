@@ -7,14 +7,11 @@ using namespace std;
 
     const int MAXVALOR = 1;
     const int numFreeCells = 4;
-    int FC[4] = {10,11,12,13};
 
     freeCell::freeCell()
-    {
-        int *p = FC;
-    } 
+    {} 
 
-    bool Empty(int count, const freeCell& cell)
+    bool freeCell::Empty(int count, freeCell& cell)
     {
         if (count == 0)
         {
@@ -27,7 +24,7 @@ using namespace std;
         }
     }
 
-    bool Full(int count)
+    bool freeCell::Full(int count)
     {
         if(count == MAXVALOR) 
         {
@@ -37,11 +34,10 @@ using namespace std;
         else 
         {
             return false;
-            count--;
         }
     }
 
-    void PushFreeCell(int count, int i)
+    void freeCell::PushFreeCell(int count, Carta c)
     {
         if(Full)
         {
@@ -49,23 +45,25 @@ using namespace std;
         }
         else
         {
-            cout << "Selecione a FreeCell desejada (10,11,12 ou 13)" << endl;
-            cin >> i;
             //Falta fazer a carta selecionada ser inserida na FreeCell desejada;
-            FC[i]; // não sei como continuar :p;
             count++;
         }
     }
 
-    void RemoveFreeCell(int count, int i)
+    void freeCell::RemoveFreeCell(int count, Carta c)
     {
         if(Empty) 
         {
             cout << "FreeCell vazia, não há presença de cartas" << endl;
         } 
         else 
-        {
-            // Falta o processo para transferir a carta da FC selecionada para uma pilha novamente
-            count--;
+        {       
+
+                count--;
         }
+    }
+
+    void freeCell::display()
+    {
+
     }

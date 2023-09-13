@@ -8,8 +8,8 @@ using namespace std;
 // Pré-condição: Os elementos do jogo foram inicializados, e são passados como parâmetros
 // Pós-condição: Renderiza os elementos do jogo.
 void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_Saida ps1, Pilha_Saida ps2, Pilha_Saida ps3, Pilha_Saida ps4) {
-    cout << "Pilhas de jogo:                                 | Pilhas de saida: " << endl;
-    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)" << endl;
+    cout << "Pilhas de jogo:                                 | Pilhas de saida:           | FreeCells:" << endl;
+    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)  |  (a)   (b)   (c)   (d)" << endl;
     for (int i = 0; i < 13; i++)
     {
         pilha1.DisplayLine(i);
@@ -25,7 +25,6 @@ void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_
         }
         cout << endl;
     }
-        cout << "(F1) (F2) (F3) (F4)" << endl;
 }
 
 // Pré-condição: O jogo foi inicializado.

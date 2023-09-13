@@ -8,14 +8,17 @@ class freeCell
 {
     public:
     freeCell();
-    bool Empty(int count, const freeCell& cell);
+    bool Empty(int count, freeCell& cell);
     bool Full(int count);
-    void PushFreeCell(int count, int i);
-    void RemoveFreeCell(int count, int i);
+    void PushFreeCell(int count, Carta c);
+    void RemoveFreeCell(int count, Carta c);
+    freeCell* nextfreeCell;
+    void display();
 
     private:
     int count = 0;
-    Carta Entry;
+    Carta current;
+    string naipe;
     
 };
 #endif
