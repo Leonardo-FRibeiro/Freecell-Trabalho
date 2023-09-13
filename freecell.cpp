@@ -1,7 +1,4 @@
 #include "freecell.h"
-#include "carta.h"
-#include "pilha.h"
-#include "pilha_saida.h"
 #include <iostream>
 using namespace std;
 
@@ -37,6 +34,8 @@ using namespace std;
         }
     }
 
+    // Pré-condição: A FreeCell ter sido criada e estar vazia
+    // Pós-Condição: Inserir Carta c na FreeCell
     void freeCell::PushFreeCell(int count, Carta c)
     {
         if(Full)
@@ -45,7 +44,8 @@ using namespace std;
         }
         else
         {
-            //Falta fazer a carta selecionada ser inserida na FreeCell desejada;
+            c.GetNaipe() == naipe && c.GetValor() == 1 + current.GetValor() || current.GetValor() == 14; 
+            current = c;
             count++;
         }
     }
@@ -59,11 +59,12 @@ using namespace std;
         else 
         {       
 
-                count--;
+            count--;
         }
     }
 
-    void freeCell::display()
+    void freeCell::Display()
     {
-
+        current.Display();
+        cout << "   ";
     }
