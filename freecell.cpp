@@ -12,6 +12,8 @@ using namespace std;
         nextfreeCell = pFC;
     } 
 
+    freeCell::~freeCell() {};
+
     bool freeCell::Empty(int count, freeCell& cell)
     {
         if (count == 0)
@@ -48,8 +50,7 @@ using namespace std;
         }
         else
         {
-            c.GetNaipe() == naipe && c.GetValor() == 1 + current.GetValor() || current.GetValor() == 14; 
-            current = c;
+            // Falta saber como faço pra adicionar :p
             count++;
         }
     }
