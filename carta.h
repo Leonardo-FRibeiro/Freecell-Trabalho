@@ -1,3 +1,8 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+//
+//
+
 #ifndef CARTA_H
 #define CARTA_H
 

@@ -1,3 +1,8 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+//
+//
+
 #include "pilha.h"
 #include "carta.h"
 #include <cstdlib>

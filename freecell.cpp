@@ -1,3 +1,8 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+//
+//
+
 #include "freecell.h"
 #include <iostream>
 using namespace std;

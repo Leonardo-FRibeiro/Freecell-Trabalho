@@ -1,3 +1,8 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+//
+//
+
 #include <iostream>
 #include "carta.h"
 #include "pilha.h"
@@ -97,6 +102,9 @@ bool FindAndPush(int local, int index, Pilha* pilhaInicio, Carta c) {
     }
 }
 
+// Pré-condição: É passado um inteiro da posição, um índice, a pilha de saída, e a carta que será inserida
+// Pós-condição: A função vai retornar verdadeiro se foi possível inserir a carta, e falso se ocorreu um erro
+// Nota: Isso é uma sobrecarga da função acima, para inserir a carta em uma pilha de saída.
 bool FindAndPush(int local, int index, Pilha_Saida* pilhaInicio, Carta c) {
     if(index == local) {
         return pilhaInicio->Push(c);
@@ -113,6 +121,9 @@ bool FindAndPush(int local, int index, Pilha_Saida* pilhaInicio, Carta c) {
     }
 }
 
+// Pré-condição: É passado um inteiro para onde a carta será movida, um inteiro de onde ela veio,
+// a primeira pilha, a primeira pilha de saída, e a carta que será movida.
+// Pós-condição: A carta é removida  da sua pilha de origem, e colocada na sua pilha nova.
 bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c, Pilha_Saida* pilhaSInicio) {
     if(destino <= 8) {
         if (FindAndPush(destino, 1, pilhaInicio, c)) {
@@ -213,14 +224,3 @@ int main () {
 
     return 1;
 }
-
-// Atualizações: 
-
-// ----------------------------
-// O que eu acho que seriam os próximos passos: 
-// - Agente devia criar um vetor com 52 espaços no começo, e preencher eles com as cartas. (ja estou fazendo isso - Augusto)
-// Esse preenchimento devia ser aleatório.(ja estou fazendo isso - Augusto)
-// - As freecells, um objetinho básico pra guardar uma única carta.
-// ----------------------------
-
-// - Leo. 
