@@ -1,3 +1,8 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+//
+//
+
 #include <iostream>
 #include "carta.h"
 #include "pilha.h"
@@ -127,10 +132,18 @@ bool FindAndPush(int local, int index, Pilha *pilhaInicio, Carta c)
     }
 }
 
+<<<<<<< HEAD
 bool FindAndPush(int local, int index, Pilha_Saida *pilhaInicio, Carta c)
 {
     if (index == local)
     {
+=======
+// Pré-condição: É passado um inteiro da posição, um índice, a pilha de saída, e a carta que será inserida
+// Pós-condição: A função vai retornar verdadeiro se foi possível inserir a carta, e falso se ocorreu um erro
+// Nota: Isso é uma sobrecarga da função acima, para inserir a carta em uma pilha de saída.
+bool FindAndPush(int local, int index, Pilha_Saida* pilhaInicio, Carta c) {
+    if(index == local) {
+>>>>>>> ce77c9db8d854a94c6a3768086ff268291022439
         return pilhaInicio->Push(c);
     }
     else
@@ -153,10 +166,21 @@ bool MoveCard(int destino, int origem, Pilha *pilhaInicio, Carta c, Pilha_Saida 
             return false;
         }
     }
+<<<<<<< HEAD
     else if (destino > 8 && destino < 13)
     {
         if (FindAndPush(destino, 9, pilhaSInicio, c))
         {
+=======
+}
+
+// Pré-condição: É passado um inteiro para onde a carta será movida, um inteiro de onde ela veio,
+// a primeira pilha, a primeira pilha de saída, e a carta que será movida.
+// Pós-condição: A carta é removida  da sua pilha de origem, e colocada na sua pilha nova.
+bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c, Pilha_Saida* pilhaSInicio) {
+    if(destino <= 8) {
+        if (FindAndPush(destino, 1, pilhaInicio, c)) {
+>>>>>>> ce77c9db8d854a94c6a3768086ff268291022439
             FindAndPop(origem, 1, pilhaInicio);
             return true;
         }
@@ -252,6 +276,7 @@ int main()
     }
 
     return 1;
+<<<<<<< HEAD
 }
 
 // Atualizações:
@@ -264,3 +289,6 @@ int main()
 // ----------------------------
 
 // - Leo.
+=======
+}
+>>>>>>> ce77c9db8d854a94c6a3768086ff268291022439

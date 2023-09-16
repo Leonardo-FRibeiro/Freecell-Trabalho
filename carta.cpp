@@ -1,3 +1,8 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+//
+//
+
 #include "carta.h"
 #include <iostream>
 

@@ -1,3 +1,8 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+//
+//
+
 #ifndef PILHA_SAIDA_H
 #define PILHA_SAIDA_H
 #include "carta.h"
