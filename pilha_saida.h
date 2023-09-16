@@ -18,6 +18,7 @@ class Pilha_Saida {
         bool CheckWin();
         Pilha_Saida* nextPilhaS;
         void Display();
+        void Reset();
     private:
         Carta current;
         string naipe;
