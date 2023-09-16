@@ -4,21 +4,21 @@
 #include "carta.h"
 using namespace std;
 
+const int MaxFreeCell = 1;
 class freeCell
 {
-    public:
-    freeCell(string Free_Cell, freeCell* pFC);
-    bool Empty(int count, freeCell& cell);
-    bool Full(int count);
-    void PushFreeCell(int count, Carta c);
-    void RemoveFreeCell(int count, Carta c);
-    freeCell* nextfreeCell;
+public:
+    freeCell();
+    ~freeCell();
+    bool Empty();
+    bool Full();
+    void PushFreeCell(int x);
+    void RemoveFreeCell(int &x);
+    freeCell *nextfreeCell;
     void display();
 
-    private:
-    int count = 0;
-    Carta current;
-    string Free_Cell;
-    
+private:
+    int count;
+    int EntryFreeCell[MaxFreeCell];
 };
 #endif
