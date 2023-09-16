@@ -1,6 +1,6 @@
 // Alunos:
 // Leonardo Franzin Ribeiro - 2108237
-//
+// Luís Felipe Rotondo Kobelnik -
 //
 
 #include <iostream>
@@ -13,10 +13,10 @@ using namespace std;
 
 // Pré-condição: Os elementos do jogo foram inicializados, e são passados como parâmetros
 // Pós-condição: Renderiza os elementos do jogo.
-void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_Saida ps1, Pilha_Saida ps2, Pilha_Saida ps3, Pilha_Saida ps4)
+void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_Saida ps1, Pilha_Saida ps2, Pilha_Saida ps3, Pilha_Saida ps4, freeCell fca, freeCell fcb, freeCell fcc, freeCell fcd)
 {
-    cout << "Pilhas de jogo:                                 | Pilhas de saida:           | FreeCells:" << endl;
-    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)  |  (a)   (b)   (c)   (d)" << endl;
+    cout << "Pilhas de jogo:                                 | Pilhas de saida:          " << endl;
+    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)" << endl;
     for (int i = 0; i < 13; i++)
     {
         pilha1.DisplayLine(i);
@@ -30,6 +30,20 @@ void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_
             ps2.Display();
             ps3.Display();
             ps4.Display();
+        }
+        cout << endl;
+    }
+    cout << "FreeCell:" << endl;
+    cout << "(a)   (b)   (c)   (d)" << endl;
+    for (int i = 0; i < 13; i++)
+    {
+        cout << "| ";
+        if (i == 0)
+        {
+            fca.display();
+            fcb.display();
+            fcc.display();
+            fcd.display();
         }
         cout << endl;
     }
@@ -132,18 +146,10 @@ bool FindAndPush(int local, int index, Pilha *pilhaInicio, Carta c)
     }
 }
 
-<<<<<<< HEAD
 bool FindAndPush(int local, int index, Pilha_Saida *pilhaInicio, Carta c)
 {
     if (index == local)
     {
-=======
-// Pré-condição: É passado um inteiro da posição, um índice, a pilha de saída, e a carta que será inserida
-// Pós-condição: A função vai retornar verdadeiro se foi possível inserir a carta, e falso se ocorreu um erro
-// Nota: Isso é uma sobrecarga da função acima, para inserir a carta em uma pilha de saída.
-bool FindAndPush(int local, int index, Pilha_Saida* pilhaInicio, Carta c) {
-    if(index == local) {
->>>>>>> ce77c9db8d854a94c6a3768086ff268291022439
         return pilhaInicio->Push(c);
     }
     else
@@ -166,21 +172,10 @@ bool MoveCard(int destino, int origem, Pilha *pilhaInicio, Carta c, Pilha_Saida 
             return false;
         }
     }
-<<<<<<< HEAD
     else if (destino > 8 && destino < 13)
     {
         if (FindAndPush(destino, 9, pilhaSInicio, c))
         {
-=======
-}
-
-// Pré-condição: É passado um inteiro para onde a carta será movida, um inteiro de onde ela veio,
-// a primeira pilha, a primeira pilha de saída, e a carta que será movida.
-// Pós-condição: A carta é removida  da sua pilha de origem, e colocada na sua pilha nova.
-bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c, Pilha_Saida* pilhaSInicio) {
-    if(destino <= 8) {
-        if (FindAndPush(destino, 1, pilhaInicio, c)) {
->>>>>>> ce77c9db8d854a94c6a3768086ff268291022439
             FindAndPop(origem, 1, pilhaInicio);
             return true;
         }
@@ -192,6 +187,49 @@ bool MoveCard(int destino, int origem, Pilha* pilhaInicio, Carta c, Pilha_Saida*
     else
     {
         return false;
+    }
+}
+
+// Precondition:
+// Postcondition:
+void Shuffle(int stack_index, int vector_index, Pilha *First_stack, Carta cards[52])
+{
+    cout << stack_index << " - " << vector_index << endl;
+    int column;
+    int v = vector_index;
+    if (stack_index > 4)
+    {
+        column = 6;
+    }
+    else
+    {
+        column = 7;
+    }
+
+    if (stack_index % 2 == 0)
+    {
+        for (int i = 0; i < column; i++)
+        {
+            First_stack->Push(cards[v], 1);
+            v++;
+        }
+
+        if (stack_index < 8)
+        {
+            Shuffle(stack_index + 1, v, First_stack->proximaPilha, cards);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < column; i++)
+        {
+            First_stack->Push(cards[v], 0);
+            v++;
+        }
+        if (stack_index < 8)
+        {
+            Shuffle(stack_index + 1, v, First_stack, cards);
+        }
     }
 }
 
@@ -221,6 +259,11 @@ int main()
     Pilha p3 = Pilha(&p4);
     Pilha p2 = Pilha(&p3);
     Pilha p1 = Pilha(&p2);
+    Shuffle(1, 9, &p1, carta);
+    freeCell fcd = freeCell("d", &fcd);
+    freeCell fcc = freeCell("c", &fcc);
+    freeCell fcb = freeCell("b", &fcb);
+    freeCell fca = freeCell("a", &fca);
     Pilha_Saida psP = Pilha_Saida("P");
     Pilha_Saida psO = Pilha_Saida("O", &psP);
     Pilha_Saida psC = Pilha_Saida("C", &psO);
@@ -236,7 +279,7 @@ int main()
         if (gameState == 1)
         {
             cout << "Escolha uma carta para mover" << endl;
-            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP);
+            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP, fca, fcb, fcc, fcd);
             cin >> origem;
             cartaSelecionada = GetCarta(origem, 1, &p1);
             system("cls"); // Nota: Isso funciona apenas no windows.
@@ -252,7 +295,7 @@ int main()
         else if (gameState == 2)
         {
             // system("cls");
-            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP);
+            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP, fca, fcb, fcc, fcd);
             cout << "A carta selecionada: ";
             cartaSelecionada.Display();
             cout << endl
@@ -276,7 +319,6 @@ int main()
     }
 
     return 1;
-<<<<<<< HEAD
 }
 
 // Atualizações:
@@ -289,6 +331,3 @@ int main()
 // ----------------------------
 
 // - Leo.
-=======
-}
->>>>>>> ce77c9db8d854a94c6a3768086ff268291022439
