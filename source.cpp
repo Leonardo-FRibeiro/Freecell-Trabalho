@@ -345,10 +345,12 @@ int main () {
     Embaralhamento(1, 0, &p1, carta);
     Carta cartaSelecionada; // Esta é a carta que o jogador está "segurando".
   
+    // Essa estrutura gerencia o jogo. Quando o jogador move ou seleciona cartas, por exemplo.
     while (gameState != 0)
     {
         if (gameState == 1)
         {
+            system("cls");
             cout << "Escolha uma carta para mover" << endl;
             DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP, fc1, fc2, fc3, fc4);
             cin >> origem;
@@ -374,8 +376,7 @@ int main () {
             DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP, fc1, fc2, fc3, fc4);
             cout << "A carta selecionada: ";
             cartaSelecionada.Display();
-            cout << endl
-                 << "Escolha onde voce quer mover a carta(0 para cancelar): " << endl;
+            cout << endl << "Escolha onde voce quer mover a carta(0 para cancelar): " << endl;
             cin >> destino;
             if (destino == 0)
             {

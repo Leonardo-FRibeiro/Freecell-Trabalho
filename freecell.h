@@ -9,7 +9,7 @@
 #include "carta.h"
 using namespace std;
 
-const int MaxFreeCell = 1;
+// Um elemento de freecell segura uma única carta.
 class freeCell
 {
 public:
