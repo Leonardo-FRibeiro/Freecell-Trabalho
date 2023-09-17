@@ -1,24 +1,31 @@
+// Alunos:
+// Leonardo Franzin Ribeiro - 2108237
+// Luís Felipe Rotondo Kobelnik - 2125543
+//
+
 #ifndef FREECELL_H
 #define FREECELL_H
 #include <iostream>
 #include "carta.h"
 using namespace std;
 
+const int MaxFreeCell = 1;
 class freeCell
 {
-    public:
-    freeCell(string Free_Cell, freeCell* pFC);
-    bool Empty(int count, freeCell& cell);
-    bool Full(int count);
-    void PushFreeCell(int count, Carta c);
-    void RemoveFreeCell(int count, Carta c);
-    freeCell* nextfreeCell;
+public:
+    freeCell(string naipe, freeCell *pFC);
+    ~freeCell();
+    bool Empty();
+    bool Full();
+    void PushFreeCell(int x, Carta c);
+    void RemoveFreeCell(int &x, Carta c);
+    freeCell *nextfreeCell;
     void display();
 
-    private:
-    int count = 0;
+private:
+    int count;
     Carta current;
-    string Free_Cell;
-    
+    int EntryFreeCell[MaxFreeCell];
+    string naipe;
 };
 #endif
