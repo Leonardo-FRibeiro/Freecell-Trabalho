@@ -15,8 +15,8 @@ using namespace std;
 // Pós-condição: Renderiza os elementos do jogo.
 void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_Saida ps1, Pilha_Saida ps2, Pilha_Saida ps3, Pilha_Saida ps4, freeCell fca, freeCell fcb, freeCell fcc, freeCell fcd)
 {
-    cout << "Pilhas de jogo:                                 | Pilhas de saida:          " << endl;
-    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)" << endl;
+    cout << "Pilhas de jogo:                                 | Pilhas de saida:            | FreeCell: " << endl;
+    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)   | (13)    (14)    (15)    (16)" << endl;
     for (int i = 0; i < 13; i++)
     {
         pilha1.DisplayLine(i);
@@ -31,21 +31,21 @@ void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_
             ps3.Display();
             ps4.Display();
         }
-        cout << endl;
-
-    }
-    cout << "FreeCell:" << endl;
-    cout << "(a)   (b)   (c)   (d)" << endl;
-    for (int i = 0; i < 13; i++)
-    {
-        cout << "| ";
-        if (i == 0)
+        if(i == 0)
         {
+            cout << "| ";
             fca.display();
             fcb.display();
             fcc.display();
             fcd.display();
         }
+            
+            if(i >= 1 && i <= 13)
+            {
+                cout << "                            ";
+                cout << "| ";
+            } 
+            
         cout << endl;
     }
 }
@@ -162,10 +162,22 @@ bool FindAndPush(int local, int index, Pilha_Saida *pilhaInicio, Carta c)
     }
 }
 
+bool FindAndPush(int local, int index, freeCell *pilhaInicio, Carta c)
+{
+    if(index == local)
+    {
+        return pilhaInicio->PushFreeCell(c);
+    }
+    else
+    {
+        return FindAndPush(local, index+1, pilhaInicio->nextfreeCell, c);
+    }
+}
+
 // Pré-condição: É passado um inteiro para onde a carta será movida, um inteiro de onde ela veio,
 // a primeira pilha, a primeira pilha de saída, e a carta que será movida.
 // Pós-condição: A carta é removida  da sua pilha de origem, e colocada na sua pilha nova.
-bool MoveCard(int destino, int origem, Pilha *pilhaInicio, Carta c, Pilha_Saida *pilhaSInicio)
+bool MoveCard(int destino, int origem, Pilha *pilhaInicio, Carta c, Pilha_Saida *pilhaSInicio, freeCell *pilhaFCInicio)
 {
     if (destino <= 8)
     {
@@ -191,62 +203,92 @@ bool MoveCard(int destino, int origem, Pilha *pilhaInicio, Carta c, Pilha_Saida 
             return false;
         }
     }
+    else if(destino > 12 && destino < 17)
+    {   
+        if (FindAndPush(destino, 13, pilhaFCInicio, c))
+        {
+            FindAndPop(origem, 1, pilhaInicio);
+            return true;
+        }
+        else
+        {
+            return false;
+        } 
+    }
+    else
+    {
+        cout << "Valor desconhecido" << endl;
+    }
+
+}
+
+// Pré-condição:
+//  Pós-condição:
+void Embaralhamento(int indice_pilha, int indice_vetor, Pilha *Primeira_pilha, Carta cartas[52])
+{
+    int coluna;
+    int v = indice_vetor;
+    if (indice_pilha > 4)
+    {
+        coluna = 6;
+    }
+    else
+    {
+        coluna = 7;
+    }
+
+    if (indice_pilha % 2 == 0)
+    {
+        for (int i = 0; i < coluna; i++)
+        {
+            Primeira_pilha->Push(cartas[v], 1);
+            v++;
+        }
+
+        if (indice_pilha < 8)
+        {
+            Embaralhamento(indice_pilha + 1, v, Primeira_pilha->proximaPilha, cartas);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < coluna; i++)
+        {
+            Primeira_pilha->Push(cartas[v], 0);
+            v++;
+        }
+        if (indice_pilha < 8)
+        {
+            Embaralhamento(indice_pilha + 1, v, Primeira_pilha, cartas);
+        }
+    }
+}
+
+// Pré-condição: As pilhas foram inicializadas
+// Pós-condição: retorna verdadeiro se as 4 pilhas de saída
+bool Venceu(Pilha_Saida *pilhaInicio, int i)
+{
+    if (i == 3 && pilhaInicio->CheckWin())
+    {
+        return true;
+    }
+    else if (pilhaInicio->CheckWin())
+    {
+        return Venceu(pilhaInicio->nextPilhaS, 1 + i);
+    }
     else
     {
         return false;
     }
 }
 
-//Pré-condição: 
-// Pós-condição:
-void Embaralhamento(int indice_pilha, int indice_vetor, Pilha* Primeira_pilha, Carta cartas[52]){
-    int coluna;
-    int v = indice_vetor;
-    if(indice_pilha>4){
-        coluna = 6;
-    }else{
-        coluna = 7;
-
+void Reiniciar(Carta cartas[52], Pilha *p1, Pilha_Saida *ps1, Pilha_Saida *ps2, Pilha_Saida *ps3, Pilha_Saida *ps4)
+{
+    for (int i = 51; i > 0; i--)
+    {
+        swap(cartas[i], cartas[rand() % (i + 1)]);
     }
 
-    if(indice_pilha%2==0){
-        for(int i = 0; i < coluna; i++){
-            Primeira_pilha->Push(cartas[v],1);
-            v++;
-        }
-
-        if(indice_pilha<8){
-        Embaralhamento(indice_pilha+1, v, Primeira_pilha->proximaPilha,cartas);
-
-        }
-    }else{
-        for(int i = 0; i < coluna; i++){
-            Primeira_pilha->Push(cartas[v],0);
-            v++;
-        }
-        if(indice_pilha<8){
-             Embaralhamento(indice_pilha+1, v, Primeira_pilha,cartas);
-        }
-    }
-}
-
-// Pré-condição: As pilhas foram inicializadas
-// Pós-condição: retorna verdadeiro se as 4 pilhas de saída 
-bool Venceu(Pilha_Saida* pilhaInicio, int i) {
-    if(i == 3 && pilhaInicio->CheckWin()) {
-        return true;
-    } else if(pilhaInicio->CheckWin()) {
-        return Venceu(pilhaInicio->nextPilhaS, 1 + i);
-    } else {
-        return false;
-    }
-}
-
-void Reiniciar(Carta cartas[52], Pilha* p1, Pilha_Saida* ps1, Pilha_Saida* ps2, Pilha_Saida* ps3, Pilha_Saida* ps4) {
-    for(int i = 51; i > 0; i--){
-        swap(cartas[i], cartas[rand()%(i+1)]);
-    }
-    
     Embaralhamento(1, 0, p1, cartas);
 
     ps1->Reset();
@@ -255,7 +297,8 @@ void Reiniciar(Carta cartas[52], Pilha* p1, Pilha_Saida* ps1, Pilha_Saida* ps2, 
     ps4->Reset();
 }
 
-int main () {
+int main()
+{
     srand(time(0));
     int index;
     Carta carta[52]; // vetor de 52 carta
@@ -291,7 +334,7 @@ int main () {
     Pilha_Saida psE = Pilha_Saida("E", &psC);
     Embaralhamento(1, 0, &p1, carta);
     Carta cartaSelecionada; // Esta é a carta que o jogador está "segurando".
-  
+
     while (gameState != 0)
     {
         if (gameState == 1)
@@ -309,7 +352,9 @@ int main () {
             {
                 gameState = 2;
             }
-        } else if (gameState == 2) {
+        }
+        else if (gameState == 2)
+        {
             system("cls");
             DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP, fca, fcb, fcc, fcd);
 
@@ -323,7 +368,7 @@ int main () {
                 cartaSelecionada = Carta();
                 gameState = 1;
             }
-            else if (MoveCard(destino, origem, &p1, cartaSelecionada, &psE) == true)
+            else if (MoveCard(destino, origem, &p1, cartaSelecionada, &psE, &fca) == true)
             {
                 gameState = 1;
             }
@@ -334,20 +379,27 @@ int main () {
             }
 
             // Uma condição final, que checa se o jogador ganhou o jogo.
-            if(Venceu(&psE, 0)) {
+            if (Venceu(&psE, 0))
+            {
                 gameState = 3;
             }
-        } else if(gameState == 3) {
+        }
+        else if (gameState == 3)
+        {
             system("cls");
             cout << "Parabens, voce ganhou essa partida!" << endl;
             cout << "Voce gostaria de jogar novamente? (s/n): ";
             cin.clear();
             cin >> opcao;
-            if(opcao == "s" || opcao == "S") {
+            if (opcao == "s" || opcao == "S")
+            {
                 Reiniciar(carta, &p1, &psE, &psC, &psO, &psP);
                 gameState = 1;
-            } else {
-                cout << endl << "Ate a próxima.";
+            }
+            else
+            {
+                cout << endl
+                     << "Ate a próxima.";
                 gameState = 0;
             }
         }

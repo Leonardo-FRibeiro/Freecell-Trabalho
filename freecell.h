@@ -17,8 +17,8 @@ public:
     ~freeCell();
     bool Empty();
     bool Full();
-    void PushFreeCell(int x, Carta c);
-    void RemoveFreeCell(int &x, Carta c);
+    bool PushFreeCell(Carta c);
+    bool RemoveFreeCell(Carta c);
     freeCell *nextfreeCell;
     void display();
 

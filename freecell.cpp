@@ -15,7 +15,7 @@ const int numFreeCells = 4;
 freeCell::freeCell(string n, freeCell *p)
 {
     count = 0;
-    current = Carta(14, n);
+    current = Carta(17, n);
     naipe = n;
     nextfreeCell = p;
 }
@@ -40,28 +40,35 @@ bool freeCell::Full()
 
 // Pré-condição: A FreeCell ter sido criada e estar vazia
 // Pós-Condição: Inserir Carta desejada na FreeCell
-void freeCell::PushFreeCell(int x, Carta c)
+bool freeCell::PushFreeCell(Carta c)
 {
     if (Full())
     {
         cout << "Não é possível inserir uma carta nessa FreeCell, escolha outra" << endl;
+        return true;
     }
-    count++;
-    current = c;
-    EntryFreeCell[count] = x;
+    else
+    {
+        current = c;
+        count++;
+        return false;
+    }
 }
 
 // Pré-condição: FreeCell possuir uma carta nela, ou seja, está cheia
 // Pós-Condição: Se a pilha não estiver vazia, ira retirar a carta desejada para realizar a jogada
-void freeCell::RemoveFreeCell(int &x, Carta c)
+bool freeCell::RemoveFreeCell(Carta c)
 {
     if (Empty())
     {
         cout << "Pilha vazia, não é possível retirar cartas daqui" << endl;
+        return true;
     }
-    x = EntryFreeCell[count];
-    c = current;
-    count--;
+    else 
+    {
+        count--;
+        return false;
+    }
 }
 
 void freeCell::display()
