@@ -7,7 +7,7 @@
 #include "carta.h"
 #include "pilha.h"
 #include "pilha_saida.h"
-//#include "freecell.h"
+#include "freecell.h"
 #include <cstdlib>
 using namespace std;
 
@@ -147,6 +147,9 @@ bool FindAndPush(int local, int index, Pilha *pilhaInicio, Carta c)
     }
 }
 
+// Pré-condição: É passado um inteiro da posição, um índice, a pilha de saída, e a carta que será inserida
+// Pós-condição: A função vai retornar verdadeiro se foi possível inserir a carta, e falso se ocorreu um erro
+// Nota: Isso é uma sobrecarga da função acima, para inserir a carta em uma pilha de saída.
 bool FindAndPush(int local, int index, Pilha_Saida *pilhaInicio, Carta c)
 {
     if (index == local)
@@ -278,7 +281,6 @@ int main () {
     Pilha p3 = Pilha(&p4);
     Pilha p2 = Pilha(&p3);
     Pilha p1 = Pilha(&p2);
-    Shuffle(1, 9, &p1, carta);
     freeCell fcd = freeCell("d", &fcd);
     freeCell fcc = freeCell("c", &fcc);
     freeCell fcb = freeCell("b", &fcb);
@@ -295,8 +297,7 @@ int main () {
         if (gameState == 1)
         {
             cout << "Escolha uma carta para mover" << endl;
-            //DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP, fca, fcb, fcc, fcd);
-            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP);
+            DisplayBoard(p1, p2, p3, p4, psE, psC, psO, psP, fca, fcb, fcc, fcd);
             cin >> origem;
             cartaSelecionada = GetCarta(origem, 1, &p1);
             system("cls"); // Nota: Isso funciona apenas no windows.
