@@ -95,6 +95,16 @@ void FindAndPop(int local, int index, Pilha *pilhaInicio)
     {
         FindAndPop(local, index + 2, pilhaInicio->proximaPilha);
     }
+
+}
+
+void FindAndPopFreecell(int local, int index, freeCell *pilhaFCInicio, Carta c)
+{
+    if (index == local) {
+        pilhaFCInicio->RemoveFreeCell(c);
+    } else {
+        FindAndPopFreecell(local, index + 1, pilhaFCInicio->nextfreeCell, c);
+    }
 }
 
 // Pré-condição: O usuário está movendo a carta para um lugar válido;
