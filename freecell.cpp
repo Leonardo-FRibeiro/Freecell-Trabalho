@@ -4,18 +4,26 @@
 // Augusto Coimbra de Oliveira - 2136390
 
 #include "freecell.h"
+#include "carta.h"
+#include "pilha.h"
 #include <iostream>
 using namespace std;
 
+int count = 0;
 const int MAXVALOR = 1;
 const int numFreeCells = 4;
+
+freeCell::freeCell(string n)
+{
+    current = Carta(14, n);
+    naipe = n;
+}
 
 // Pré-condição: < nenhuma >
 // Pós-Condição: FreeCell é criada
 freeCell::freeCell(string n, freeCell *p)
 {
-    count = 0;
-    current = Carta(17, n);
+    current = Carta(14, n);
     naipe = n;
     nextfreeCell = p;
 }
@@ -35,7 +43,7 @@ bool freeCell::Empty()
 // Pós-Condição: Adicionará 1 ao contador para que a freeCel fique cheia
 bool freeCell::Full()
 {
-    return (count == MaxFreeCell);
+    return (count == MAXVALOR);
 }
 
 // Pré-condição: A FreeCell ter sido criada e estar vazia
@@ -44,14 +52,14 @@ bool freeCell::PushFreeCell(Carta c)
 {
     if (Full())
     {
-        cout << "Não é possível inserir uma carta nessa FreeCell, escolha outra" << endl;
-        return true;
+        cout << "Nao e possivel inserir uma carta nessa FreeCell, escolha outra" << endl;
+        return false;
     }
     else
     {
-        current = c;
         count++;
-        return false;
+        current = c;
+        return true;
     }
 }
 
@@ -61,13 +69,13 @@ bool freeCell::RemoveFreeCell(Carta c)
 {
     if (Empty())
     {
-        cout << "Pilha vazia, não é possível retirar cartas daqui" << endl;
-        return true;
+        cout << "Pilha vazia, nao e possivel retirar cartas daqui" << endl;
+        return false;
     }
     else 
     {
         count--;
-        return false;
+        return true;
     }
 }
 

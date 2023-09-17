@@ -16,7 +16,7 @@ using namespace std;
 void DisplayBoard(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha pilha4, Pilha_Saida ps1, Pilha_Saida ps2, Pilha_Saida ps3, Pilha_Saida ps4, freeCell fca, freeCell fcb, freeCell fcc, freeCell fcd)
 {
     cout << "Pilhas de jogo:                                 | Pilhas de saida:            | FreeCell: " << endl;
-    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)   | (13)    (14)    (15)    (16)" << endl;
+    cout << " (1)   (2)   (3)   (4)   (5)   (6)   (7)   (8)  |  (9)   (10)   (11)   (12)   | (13)   (14)   (15)   (16)" << endl;
     for (int i = 0; i < 13; i++)
     {
         pilha1.DisplayLine(i);
@@ -82,6 +82,10 @@ void FindAndPop(int local, int index, Pilha *pilhaInicio)
     if (index == local)
     {
         pilhaInicio->Pop(0);
+    }
+    else if (index + 1 == local)
+    {
+        pilhaInicio->Pop(1);
     }
     else if (index + 1 == local)
     {
@@ -170,7 +174,7 @@ bool FindAndPush(int local, int index, freeCell *pilhaInicio, Carta c)
     }
     else
     {
-        return FindAndPush(local, index+1, pilhaInicio->nextfreeCell, c);
+        return FindAndPush(local, index + 1, pilhaInicio->nextfreeCell, c);
     }
 }
 
@@ -215,11 +219,6 @@ bool MoveCard(int destino, int origem, Pilha *pilhaInicio, Carta c, Pilha_Saida 
             return false;
         } 
     }
-    else
-    {
-        cout << "Valor desconhecido" << endl;
-    }
-
 }
 
 // Pré-condição:Distribuição das 52 cartas nas pilhas.
@@ -324,10 +323,10 @@ int main()
     Pilha p3 = Pilha(&p4);
     Pilha p2 = Pilha(&p3);
     Pilha p1 = Pilha(&p2);
-    freeCell fcd = freeCell("d", &fcd);
-    freeCell fcc = freeCell("c", &fcc);
-    freeCell fcb = freeCell("b", &fcb);
-    freeCell fca = freeCell("a", &fca);
+    freeCell fcd = freeCell("d");
+    freeCell fcc = freeCell("c", &fcd);
+    freeCell fcb = freeCell("b", &fcc);
+    freeCell fca = freeCell("a", &fcb);
     Pilha_Saida psP = Pilha_Saida("P");
     Pilha_Saida psO = Pilha_Saida("O", &psP);
     Pilha_Saida psC = Pilha_Saida("C", &psO);

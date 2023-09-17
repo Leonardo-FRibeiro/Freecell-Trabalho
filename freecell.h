@@ -13,6 +13,7 @@ const int MaxFreeCell = 1;
 class freeCell
 {
 public:
+    freeCell(string naipe);
     freeCell(string naipe, freeCell *pFC);
     ~freeCell();
     bool Empty();
