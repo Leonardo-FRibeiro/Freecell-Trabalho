@@ -197,8 +197,8 @@ bool MoveCard(int destino, int origem, Pilha *pilhaInicio, Carta c, Pilha_Saida 
     }
 }
 
-//Pré-condição: 
-// Pós-condição:
+//Pré-condição: Distribuição das 52 cartas nas pilhas.
+// Pós-condição: São distribuidas 7 cartas para as primeiras 4 pilhas e 6 paras as 4 restantes. Todas elas possuem 2 colunas e a distribuição sempre começa da esquerda pra direita 
 void Embaralhamento(int indice_pilha, int indice_vetor, Pilha* Primeira_pilha, Carta cartas[52]){
     int coluna;
     int v = indice_vetor;
