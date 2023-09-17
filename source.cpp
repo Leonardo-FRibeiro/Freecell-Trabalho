@@ -1,7 +1,7 @@
 // Alunos:
 // Leonardo Franzin Ribeiro - 2108237
-// Luís Felipe Rotondo Kobelnik -
-//
+// Luís Felipe Rotondo Kobelnik - 2125543
+// Augusto Coimbra de Oliveira - 2136390
 
 #include <iostream>
 #include "carta.h"
