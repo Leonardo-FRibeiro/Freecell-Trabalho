@@ -1,7 +1,7 @@
 // Alunos:
 // Leonardo Franzin Ribeiro - 2108237
-//
-//
+// Luís Felipe Rotondo Kobelnik - 2125543
+// Augusto Coimbra de Oliveira - 2136390
 
 #include "carta.h"
 #include <iostream>
@@ -48,7 +48,7 @@ Carta::Carta(int val, string naip) {
             case 13: // Caso seja um rei
                 display = "[K" + naipe + "]";
                 break;
-            default: // Se cair aqui, alguma coisa deu catastroficamente errado.
+            default: // Se cair aqui, ele improvisa uma carta com os naipes. Usado em alguns gráficos.
                 display = "[" + naipe + naipe + "]";
                 break;
         }
